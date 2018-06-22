@@ -95,5 +95,5 @@ public class Student {
     public void setSemester(int semester) {
         this.semester = semester;
     }
-
+    
 }

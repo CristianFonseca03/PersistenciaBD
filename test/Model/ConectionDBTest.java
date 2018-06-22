@@ -6,6 +6,10 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,8 +23,15 @@ import static org.junit.Assert.*;
  */
 public class ConectionDBTest {
     public ConectionDB connect;
+    public StudentSQL student;
+    public Student std;
+    public StudentDAO dao ;
     
     public ConectionDBTest() {
+        connect= new ConectionDB();
+        student= new StudentSQL();
+        std= new Student("201520816", "Cangas", "Gonzales", false, new GregorianCalendar(1996, 3, 27), 6, "5573003");
+        dao= new StudentDAO();
     }
     
     @BeforeClass
@@ -44,7 +55,6 @@ public class ConectionDBTest {
      */
     @Test
     public void testIsConnected() throws Exception {
-        connect=new ConectionDB();
         assertTrue(connect.isConnected());
     }
 
@@ -52,7 +62,26 @@ public class ConectionDBTest {
      * Test of getConnect method, of class ConectionDB.
      */
     @Test
-    public void testGetConnect() {
+    public void testGetStudents() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        StudentDAO dao = new StudentDAO();
+        assertNotNull(dao.getStudents());
+        ResultSet rs = dao.getStudents();
+        while(rs.next()){
+            System.out.println(rs.getString(1));
+            System.out.println(rs.getString("name"));
+        }
     }
+    
+    @Test
+    public void testGetStudent() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+        assertNotNull(dao.getStudent("123456"));
+    }
+    
+    @Test
+    public void testinsertStudent() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+        assertTrue(dao.insertStudent(std));
+    }
+    
+    
     
 }

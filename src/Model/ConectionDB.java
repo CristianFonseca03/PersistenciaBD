@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class ConectionDB {
 
     private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/students";
+    private static final String URL = "jdbc:mysql://localhost:3306/Students";
     private Connection connect;
     private static final String USER = "root";
     private static final String PassWord = "";
